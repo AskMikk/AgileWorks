@@ -1,0 +1,35 @@
+@model IEnumerable<UserSupportApp.Models.Inquiry>
+
+@{
+    ViewData["Title"] = "Aktiivsed päringud";
+}
+
+<div class="table-container">
+    <h2>@ViewData["Title"]</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Kirjeldus</th>
+                <th>Esitamise aeg</th>
+                <th>Lahendamise tähtaeg</th>
+                <th>Tegevused</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var inquiry in Model)
+            {
+                var deadlineClass = inquiry.ResolutionDeadline < DateTime.Now.AddHours(1) ? "table-danger" : "";
+                <tr class="@deadlineClass">
+                    <td>@inquiry.Description</td>
+                    <td>@inquiry.SubmissionTime.ToString("g")</td>
+                    <td>@inquiry.ResolutionDeadline.ToString("g")</td>
+                    <td>
+                        <a asp-action="Resolve" asp-route-id="@inquiry.Id" class="btn btn-success">Märgi lahendatuks</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-action="Create" class="btn btn-primary btn-create-new">Loo uus päring</a>
+</div>

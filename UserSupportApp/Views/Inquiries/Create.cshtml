@@ -1,0 +1,31 @@
+@model UserSupportApp.Models.Inquiry
+
+@{
+    ViewData["Title"] = "Loo pöördumise";
+}
+
+<div class="form-container">
+    <h2>@ViewData["Title"]</h2>
+
+    <form asp-action="Create">
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ResolutionDeadline" class="control-label"></label>
+            <input asp-for="ResolutionDeadline" class="form-control" type="datetime-local" />
+            <span asp-validation-for="ResolutionDeadline" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Salvesta" class="btn btn-primary" />
+        </div>
+    </form>
+
+    <a asp-action="Index" class="back-link">Tagasi nimekirja</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
