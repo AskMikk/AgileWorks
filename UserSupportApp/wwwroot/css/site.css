@@ -4,6 +4,7 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: gray;
 }
 
 .table-container {
